@@ -1,0 +1,51 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+
+class Onboard extends StatefulWidget {
+  const Onboard({Key? key}) : super(key: key);
+
+  @override
+  _OnboardState createState() => _OnboardState();
+}
+
+class _OnboardState extends State<Onboard> {
+  final List<String> imageList = [
+    'https://picsum.photos/250?image=9',
+    'https://picsum.photos/250?image=9',
+    'https://picsum.photos/250?image=9',
+  ];
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: GFCarousel(
+          autoPlay: true,
+          hasPagination: true,
+          items: imageList
+              .map(
+                (url) => Container(
+              margin: EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Image.network(
+                  url,
+                  
+                  width: 500.0,
+                ),
+              ),
+            ),
+          )
+              .toList(),
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
